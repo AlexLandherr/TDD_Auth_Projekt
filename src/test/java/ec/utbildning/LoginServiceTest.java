@@ -12,6 +12,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
+import static org.mockito.Mockito.when;
+
 @ExtendWith(MockitoExtension.class)
 public class LoginServiceTest {
     private List<User> userList;
@@ -20,7 +22,7 @@ public class LoginServiceTest {
     @Mock
     UserRepo userRepo;
 
-    @BeforeAll
+    @BeforeEach
     public void setUserList() {
         userList = List.of(
                 new User("anna", "losen", UserRole.STUDENT),
@@ -42,6 +44,7 @@ public class LoginServiceTest {
     })
     public void userLogin_CorrectPasswords(String username, String password, boolean expectedOutcome) {
         //Given
+        when(userRepo.findAll()).thenReturn(userList);
 
         //When
         boolean result = loginService.userLogin(username, password);
