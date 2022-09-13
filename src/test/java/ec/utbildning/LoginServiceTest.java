@@ -52,4 +52,21 @@ public class LoginServiceTest {
         //Then
         Assertions.assertEquals(expectedOutcome, result);
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {
+            "anna, correcthorsebatterystaple, false",
+            "berit, NCC-1701, false",
+            "kalle, hallon, false"
+    })
+    public void userLogin_IncorrectPasswords(String username, String password, boolean expectedOutcome) {
+        //Given
+        when(userRepo.findAll()).thenReturn(userList);
+
+        //When
+        boolean result = loginService.userLogin(username, password);
+
+        //Then
+        Assertions.assertEquals(expectedOutcome, result);
+    }
 }
