@@ -86,4 +86,7 @@ public class LoginServiceTest {
         //Then
         Assertions.assertEquals(expectedOutcome, result);
     }
+
+    //Test both usernames and passwords wrong!!!
+    //Test null login inputs!!!
 }
