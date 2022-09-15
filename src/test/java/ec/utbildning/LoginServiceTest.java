@@ -104,6 +104,20 @@ public class LoginServiceTest {
         Assertions.assertEquals(expectedOutcome, result);
     }
 
-    //Test both usernames and passwords wrong!!!
-    //Test null login inputs!!!
+    @ParameterizedTest
+    @CsvSource(value = {
+            ",, false",
+            ",, false",
+            ",, false"
+    })
+    public void userLogin_NullUsernameAndPassword(String username, String password, boolean expectedOutcome) {
+        //Given
+        when(userRepo.findAll()).thenReturn(userList);
+
+        //When
+        boolean result = loginService.userLogin(username, password);
+
+        //Then
+        Assertions.assertEquals(expectedOutcome, result);
+    }
 }
