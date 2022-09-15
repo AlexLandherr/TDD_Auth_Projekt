@@ -36,7 +36,7 @@ public class LoginServiceTest {
         loginService = new LoginService(userRepo);
     }
 
-    @ParameterizedTest
+    /*@ParameterizedTest
     @CsvSource(value = {
             "anna, losen, true",
             "berit, 123456, true",
@@ -119,5 +119,22 @@ public class LoginServiceTest {
 
         //Then
         Assertions.assertEquals(expectedOutcome, result);
+    }*/
+
+    @ParameterizedTest
+    @CsvSource(value = {
+            "anna, losen, eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhbm5hIiwiUGFzc3dvcmQiOiJsb3NlbiJ9.ohJE-JmNnDiDVBEkWwXh_5vft8-fyiA8lGPRrzid5VlhUDG3nTCpzv9rTGh7wBmPBlqOnwCh9-O05Mz--P1IGQ",
+            "berit, 123456, eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJiZXJpdCIsIlBhc3N3b3JkIjoiMTIzNDU2In0.0QU8FQJDiTnh7AXALKfNI9HEzol2HGCCjCBaTlW4ToIm9c6Z9DY9icmNhLzgbV10wf5B87RB4EPHjqcXowcfBQ",
+            "kalle, password, eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrYWxsZSIsIlBhc3N3b3JkIjoicGFzc3dvcmQifQ.5dWlb3zHE13RLXREtT2tLM4d40jpQpRFkEzn7NLB5qbKlFLPVFEf3LPZoD7I4qg5xdfTp3IkM-oTIfQY1Vbsug"
+    })
+    public void userLogin_TokenConfirmation(String username, String password, String expectedToken) {
+        //Given
+        when(userRepo.findAll()).thenReturn(userList);
+
+        //When
+        String result = loginService.userLogin(username, password);
+
+        //Then
+        Assertions.assertEquals(expectedToken, result);
     }
 }

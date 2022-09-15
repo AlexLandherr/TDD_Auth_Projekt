@@ -29,7 +29,7 @@
         </dependency>
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-api</artifactId>
+            <artifactId>jjwt-impl</artifactId>
             <version>0.11.2</version>
         </dependency>
         <dependency>
