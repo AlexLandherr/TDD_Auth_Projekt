@@ -73,4 +73,21 @@ public class TokenVerificationServiceTest {
         //Then
         Assertions.assertEquals(expectedOutcome, result);
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {
+            ", false",
+            ", false",
+            ", false"
+    })
+    public void NullToken(String token, boolean expectedOutcome) {
+        //Given
+        when(userRepo.findAll()).thenReturn(userList);
+
+        //When
+        boolean result = tokenVerificationService.tokenCheck(token);
+
+        //Then
+        Assertions.assertEquals(expectedOutcome, result);
+    }
 }
